@@ -8,8 +8,7 @@
 
     <com.example.minesweeper.CustomView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
+        android:layout_height="500dp"
 
         />
 
@@ -17,11 +16,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Button one"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
         />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Button two"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
         />
         <TextView
             android:layout_width="match_parent"
