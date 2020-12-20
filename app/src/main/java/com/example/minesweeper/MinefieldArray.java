@@ -116,6 +116,53 @@ public class MinefieldArray{
 
         }
 
+        //count mines on board
+    public int countMines(){
+        int count = 0;
+        for (int i=0;i<10;i++){
+            for (int j=0;j<10;j++){
+                if (board[i][j] == Mine){
+                    count ++;
+                }
+            }
+        }
+        return count;
+
+    }
+
+        //mine hit
+    private boolean mineHit(){
+        for (int i = 0; i <10; i++){
+            for (int j = 0; j<10; j++){
+                if(board[i][j] == Mine & coveredBoard [i][j] == Uncovered){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //check to see if a mine was hit
+    public boolean checkLoss(){
+        return mineHit();
+    }
+
+    //check if all non mine occupied squares are opened
+    public boolean noMineHit(){
+        int openSquares = 0;
+        for (int i=0;i<10;i++){
+            for (int j=0;j<10;j++){
+                if(board[i][j] != Mine && coveredBoard [i][j] == Uncovered){
+                    openSquares ++;
+                }
+            }
+        }
+        return openSquares == (100 - countMines());
+    }
+
+
+
+
 
 
 

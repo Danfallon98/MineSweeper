@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import com.example.minesweeper.MinefieldArray;
+import com.google.android.material.textview.MaterialTextView;
 
 
 //Class for customview
@@ -20,6 +21,7 @@ public class CustomView extends View {
     private Paint paintShown;
     private Paint paintMine;
     private Paint paintText;
+    private boolean gameOver  = false;
 
     public CustomView(Context c, AttributeSet as){
         super(c, as);
@@ -151,10 +153,20 @@ public class CustomView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event){
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-           int x = ((int) event.getX() / (getWidth()/10));
-           int y = ((int) event.getY() / (getHeight()/10));
-           touched(x, y);
+            if(gameOver){
+                MinefieldArray.getInstance().resetBoard();
+                MinefieldArray.getInstance().placeMines();
+                MinefieldArray.getInstance().countMines();
+                invalidate();
+                gameOver = false;
+            }
+            else {
 
+                int x = ((int) event.getX() / (getWidth() / 10));
+                int y = ((int) event.getY() / (getHeight() / 10));
+                touched(x, y);
+                mineFound();
+            }
            invalidate();
 
         }
@@ -169,6 +181,18 @@ public class CustomView extends View {
             MinefieldArray.getInstance().setCoveredState(x,y, MinefieldArray.getInstance().getUncovered());
         }
     }
+
+    //Check for if a mine is found
+    private void mineFound(){
+        if (MinefieldArray.getInstance().noMineHit() && !(MinefieldArray.getInstance().checkLoss())){
+            gameOver = true;
+        }
+        else if (MinefieldArray.getInstance().checkLoss()){
+            gameOver = true;
+        }
+
+    }
+
 
 
 
