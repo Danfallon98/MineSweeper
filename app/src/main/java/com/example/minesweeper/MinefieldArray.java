@@ -1,5 +1,7 @@
 package com.example.minesweeper;
 
+import android.util.Log;
+
 import java.util.Random;
 
 public class MinefieldArray{
@@ -18,6 +20,8 @@ public class MinefieldArray{
         }
         return instance;
     }
+
+    Random random = new Random();
 
     //cell states
     public static final int Covered = 0;
@@ -91,12 +95,26 @@ public class MinefieldArray{
         return Uncovered;
     }
 
+    //reset Board
+    public void resetBoard(){
+        for (int i = 0; i < 10; i++){
+            for (int j = 0; j <10; j++){
+                board [i][j] =Empty;
+                coveredBoard [i][j] = Covered;
+            }
+        }
+    }
 
+    //place the mines
+    public void placeMines(){
+            for (int i=0;i<10;i++){
+                for (int j=0;j<10;j++){
+                    if (random.nextInt(5) == 2)
+                    board [i][j] = Mine;
+                }
+            }
 
-
-
-
-
+        }
 
 
 
